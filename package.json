@@ -1,0 +1,19 @@
+{
+  "name": "inpimaca-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edjopima/inpimaca-api.git"
+  },
+  "author": "Eduardo Piña",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Edjopima/inpimaca-api/issues"
+  },
+  "homepage": "https://github.com/Edjopima/inpimaca-api#readme"
+}
