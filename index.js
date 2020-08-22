@@ -1,25 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const knex = require('knex');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const salt = bcrypt.genSaltSync(saltRounds);
 const db =knex({
     client: 'pg',
     connection: {
     host : '127.0.0.1',
-    user : DB_USER,
-    password : DB_PASSWORD,
-    database : DB_NAME
+    user : '',
+    password : '',
+    database : ''
     }
 })
+
+const {pedirInventario} = require('./controllers/inventario');
+const {registrarUsuario} = require('./controllers/registrar');
+const {iniciarSesion} = require('./controllers/iniciarSesion');
 
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
-    db.select('*').from('Lista de precios')
-    .then((data)=>res.json(data))
-    .catch((err)=>res.status(400).json(error));
-})
+app.get('/',(req,res) => pedirInventario(req,res,db));
+app.post('/registrar',(req,res) => registrarUsuario(req,res,db,bcrypt,salt));
+app.post('/iniciarSesion',(req,res) => iniciarSesion(req,res,db,bcrypt));
 app.listen(3000, ()=>{
     console.log('app is running on port 3000');
 })
