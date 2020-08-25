@@ -17,6 +17,7 @@ const db =knex({
 const {pedirInventario} = require('./controllers/inventario');
 const {registrarUsuario} = require('./controllers/registrar');
 const {iniciarSesion} = require('./controllers/iniciarSesion');
+const {pedirProveedores,registrarProveedor} = require('./controllers/proveedores');
 
 const app = express();
 app.use(bodyParser.json());
@@ -24,6 +25,8 @@ app.use(bodyParser.json());
 app.get('/',(req,res) => pedirInventario(req,res,db));
 app.post('/registrar',(req,res) => registrarUsuario(req,res,db,bcrypt,salt));
 app.post('/iniciarSesion',(req,res) => iniciarSesion(req,res,db,bcrypt));
+app.get('/proveedores',(req,res) => pedirProveedores(req,res,db));
+app.post('/registrarProveedor',(req,res) => registrarProveedor(req,res,db));
 app.listen(3000, ()=>{
     console.log('app is running on port 3000');
 })
