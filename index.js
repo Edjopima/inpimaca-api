@@ -8,9 +8,9 @@ const db =knex({
     client: 'pg',
     connection: {
     host : '127.0.0.1',
-    user : 'edjopima',
-    password : '15101998',
-    database : 'inpimaca'
+    user : '',
+    password : '',
+    database : ''
     }
 });
 
