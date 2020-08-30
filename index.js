@@ -12,13 +12,16 @@ const db =knex({
     password : '15101998',
     database : 'inpimaca'
     }
-})
+});
 
 const {pedirInventario} = require('./controllers/inventario');
 const {registrarUsuario} = require('./controllers/registrar');
 const {iniciarSesion} = require('./controllers/iniciarSesion');
 const {pedirProveedores, registrarProveedor} = require('./controllers/proveedores');
-const {cuentasProveedores, registrarCuentas, registrarCuenta} = require('./controllers/cuentasProveedores');
+const {cuentasProveedores, registrarCuenta} = require('./controllers/cuentasProveedores');
+const {pedirFacturas, registrarFacturas} = require('./controllers/facturas');
+const {pedirLotes, registrarLote} = require('./controllers/lotes');
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -30,6 +33,10 @@ app.get('/proveedores',(req,res) => pedirProveedores(req,res,db));
 app.post('/registrarProveedor',(req,res) => registrarProveedor(req,res,db));
 app.get('/cuentasProveedores', (req,res) => cuentasProveedores(req,res,db));
 app.post('/registrarCuenta', (req,res) => registrarCuenta(req,res,db));
+app.get('/facturas' ,(req,res) => pedirFacturas(req,res,db));
+app.post('/registrarFactura', (req,res) => registrarFacturas(req,res,db));
+app.get('/lotes', (req,res) => pedirLotes(req,res,db));
+app.post('/registrarLote', (req,res) => registrarLote(req,res,db));
 app.listen(3000, ()=>{
     console.log('app is running on port 3000');
 })
