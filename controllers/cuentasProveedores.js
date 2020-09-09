@@ -19,7 +19,19 @@ const registrarCuenta = (req,res,db) => {
     .catch((err)=>res.status(400).json(err));
 }
 
+const modificarCuenta = (req,res,db) => {
+    const {id,nombre,ci,nCuenta,banco} = req.body;
+    db('cuentas de proveedores').where('id','=',id)
+    .update({
+        nombre,
+        ci,
+        nCuenta,
+        banco
+    })
+}
+
 module.exports = {
     cuentasProveedores,
-    registrarCuenta
+    registrarCuenta,
+    modificarCuenta
 }

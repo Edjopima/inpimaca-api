@@ -14,7 +14,18 @@ const registrarProveedor = (req,res,db)=>{
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json(err));
 }
+const modificarProveedor = (req,res,db) => {
+    const {id,nombre,alias,nTelefono} = req.body;
+    db('proveedores').where('id','=',id)
+    .update({
+        nombre,
+        alias,
+        nTelefono
+    })
+}
+
 module.exports={
     pedirProveedores,
-    registrarProveedor
+    registrarProveedor,
+    modificarProveedor
 }

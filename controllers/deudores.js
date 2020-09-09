@@ -14,7 +14,19 @@ const registrarDeudor = (req,res,db)=>{
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json(err));
 }
+
+const modificarDeuada = (req,res,db) => {
+    const {titulo,deuda,id,user} = req.body;
+    db('deudores').where('id','=',id)
+    .update({
+        titulo,
+        deuda,
+        ultimoEdit:user
+    })
+}
+
 module.exports={
     pedirDeudores,
-    registrarDeudor
+    registrarDeudor,
+    modificarDeuada
 }
