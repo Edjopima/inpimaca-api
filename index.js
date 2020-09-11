@@ -4,13 +4,14 @@ const knex = require('knex');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
+require('dotenv').config();
 const db =knex({
     client: 'pg',
     connection: {
     host : '127.0.0.1',
-    user : '',
-    password : '',
-    database : ''
+    user : process.env.DB_USER,
+    password : process.env.DB_PASSWORD,
+    database : 'inpimaca'
     }
 });
 
