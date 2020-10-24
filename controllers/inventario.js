@@ -1,25 +1,25 @@
 const pedirInventario = (req,res,db) =>{
-    db.select('*').from('Lista de precios')
+    db.select('*').from('inventory')
     .then((data)=>res.json(data))
     .catch((err)=>res.status(400).json(err));
 }
 
 const agregarElemento = (req,res,db) => {
-    const {producto,precio,categoria} = req.body;
-    db('Lista de precios').insert({
-        Producto:producto,
-        Precio:precio,
-        Categoria:categoria
+    const {product,price,category} = req.body;
+    db('inventory').insert({
+        product:product,
+        price:price,
+        category:category
     })
 }
 
 const actualizarElemento = (req,res,db) =>{
-    const {id,profucto,precio,categoria} = req.body;
-    db('Lista de precios').where('id','=',id)
+    const {id,product,price,category} = req.body;
+    db('inventory').where('id','=',id)
     .update({
-        Producto:producto,
-        Precio:precio,
-        Categoria:categoria
+        product:product,
+        price:price,
+        category:category
     })
 }
 

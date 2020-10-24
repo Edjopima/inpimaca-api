@@ -1,26 +1,26 @@
 const pedirProveedores = (req,res,db)=>{
-    db.select('*').from('proveedores')
+    db.select('*').from('providers')
     .then((data)=>res.json(data))
     .catch((err)=>res.status(400).json(err));
 }
 
 const registrarProveedor = (req,res,db)=>{
-    const {nombre,alias,nTelefono} = req.body;
-    db('proveedores').insert({
-        nombre,
+    const {name,alias,phoneNumber} = req.body;
+    db('providers').insert({
+        name,
         alias,
-        nTelefono
+        phoneNumber
     })
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json(err));
 }
 const modificarProveedor = (req,res,db) => {
-    const {id,nombre,alias,nTelefono} = req.body;
-    db('proveedores').where('id','=',id)
+    const {id,name,alias,phoneNumber} = req.body;
+    db('providers').where('id','=',id)
     .update({
-        nombre,
+        name,
         alias,
-        nTelefono
+        phoneNumber
     })
 }
 

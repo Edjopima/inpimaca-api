@@ -1,33 +1,33 @@
 const pedirTareas = (req,res,db)=>{
-    db.select('*').from('tareas')
+    db.select('*').from('tasks')
     .then((data)=>res.json(data))
     .catch((err)=>res.status(400).json(err));
 }
 
 const registrarTarea = (req,res,db)=>{
-    const {titulo,tarea,estado,creador} = req.body;
-    db('tareas').insert({
-        tarea,
-        estado,
-        creador,
-        titulo
+    const {title,task,state,lastEdit} = req.body;
+    db('tasks').insert({
+        task,
+        state,
+        lastEdit,
+        title
     })
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json(err));
 }
 
-const modificarTarea = (req,res,db) => {
-    const {titulo,tarea,id,user} = req.body;
-    db('tareas').where('id','=',id)
+const modificarTareas = (req,res,db) => {
+    const {title,task,id,user} = req.body;
+    db('tasks').where('id','=',id)
     .update({
-        titulo,
-        tarea,
-        ultimoEdit:user
+        title,
+        task,
+        lastEdit:user
     })
 }
 
 module.exports={
     pedirTareas,
-    registrartarea,
-    modificarTarea
+    registrarTarea,
+    modificarTareas
 }

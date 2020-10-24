@@ -1,27 +1,27 @@
 const pedirDeudores = (req,res,db)=>{
-    db.select('*').from('deudores')
+    db.select('*').from('debtors')
     .then((data)=>res.json(data))
     .catch((err)=>res.status(400).json(err));
 }
 
 const registrarDeudor = (req,res,db)=>{
-    const {titulo,deuda,ultimoEdit} = req.body;
-    db('deudores').insert({
-        titulo,
-        deuda,
-        ultimoEdit
+    const {title,debt,lastEdit} = req.body;
+    db('debtors').insert({
+        title,
+        debt,
+        lastEdit
     })
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json(err));
 }
 
 const modificarDeuada = (req,res,db) => {
-    const {titulo,deuda,id,user} = req.body;
-    db('deudores').where('id','=',id)
+    const {title,debt,id,user} = req.body;
+    db('debtors').where('id','=',id)
     .update({
-        titulo,
-        deuda,
-        ultimoEdit:user
+        title,
+        debt,
+        lastEdit:user
     })
 }
 

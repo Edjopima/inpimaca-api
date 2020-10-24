@@ -1,6 +1,6 @@
 const registrarUsuario = (req,res,db,bcrypt,salt) =>{
-    const {nombre,user,email,contraseña,permisos} = req.body;
-    const hash = bcrypt.hashSync(contraseña, salt);
+    const {name,user,email,password,permissions} = req.body;
+    const hash = bcrypt.hashSync(password, salt);
     db.transaction(trx => {
     trx.insert({
         hash: hash,
@@ -13,9 +13,9 @@ const registrarUsuario = (req,res,db,bcrypt,salt) =>{
         .returning('*')
         .insert({
             email: email,
-            nombre: nombre,
+            name: name,
             user:loginUser[0],
-            permisos:permisos
+            permissions:permissions
         })
         .then(user => {
             res.json(user[0]);

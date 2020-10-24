@@ -1,11 +1,11 @@
 const iniciarSesion = (req,res,db,bcrypt) => {
-    const {user,contraseña} = req.body;
-    if (!user||!contraseña){
+    const {user,password} = req.body;
+    if (!user||!password){
         res.status(400).json('incorrect form submission');
     }else{
     db.select('user','hash').from('login').where('user','=',user)
     .then(data=>{
-        const isValid = bcrypt.compareSync(contraseña, data[0].hash);
+        const isValid = bcrypt.compareSync(password, data[0].hash);
         if (isValid) {
             return db.select('*').from('users')
             .where('user', '=', user)
