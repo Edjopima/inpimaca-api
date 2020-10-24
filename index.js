@@ -5,8 +5,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 require('dotenv').config();
-const db =knex({ client: 'pg', connection: process.env.DATABASE_URL}
-});
+const db =knex({ client: 'pg', connection: process.env.DATABASE_URL});
 
 
 const {pedirInventario} = require('./controllers/inventario');
