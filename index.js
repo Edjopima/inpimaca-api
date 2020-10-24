@@ -36,6 +36,6 @@ app.get('/facturas' ,(req,res) => pedirFacturas(req,res,db));
 app.post('/registrarFactura', (req,res) => registrarFacturas(req,res,db));
 app.get('/lotes', (req,res) => pedirLotes(req,res,db));
 app.post('/registrarLote', (req,res) => registrarLote(req,res,db));
-app.listen(PORT, ()=>{
-    console.log(`app is running on port ${PORT}` );
+app.listen(process.env.PORT, ()=>{
+    console.log(`app is running on port ${process.env.PORT}` );
 })
