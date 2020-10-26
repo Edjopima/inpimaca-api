@@ -19,6 +19,7 @@ const {pedirLotes, registrarLote} = require('./controllers/lotes');
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/',(req,res) => pedirInventario(req,res,db));
 app.post('/registrar',(req,res) => registrarUsuario(req,res,db,bcrypt,salt));
