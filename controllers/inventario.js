@@ -11,6 +11,8 @@ const agregarElemento = (req,res,db) => {
         price:price,
         category:category
     })
+    .then((data)=>res.json(data))
+    .catch((err)=>res.status(400).json(err))
 }
 
 const actualizarElemento = (req,res,db) =>{
@@ -21,10 +23,20 @@ const actualizarElemento = (req,res,db) =>{
         price:price,
         category:category
     })
+    .then((data)=>res.json(data))
+    .catch((err)=>res.status(400).json(err))
+}
+
+const eliminarElemento = (req,res,db)=>{
+    const {id} =req.body;
+    db('inventory').where('id',id).del()
+    .then((data)=>res.json(data))
+    .catch((err)=>res.status(400).json(err));
 }
 
 module.exports={
     pedirInventario,
     agregarElemento,
-    actualizarElemento
+    actualizarElemento,
+    eliminarElemento
 }

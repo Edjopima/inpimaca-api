@@ -9,7 +9,7 @@ require('dotenv').config();
 const db =knex({ client: 'pg', connection: process.env.DATABASE_URL});
 
 
-const {pedirInventario} = require('./controllers/inventario');
+const {pedirInventario, agregarElemento, actualizarElemento, eliminarElemento} = require('./controllers/inventario');
 const {registrarUsuario} = require('./controllers/registrar');
 const {iniciarSesion} = require('./controllers/iniciarSesion');
 const {pedirProveedores, registrarProveedor} = require('./controllers/proveedores');
@@ -22,7 +22,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/',(req,res) => pedirInventario(req,res,db));
+app.get('/inventario',(req,res) => pedirInventario(req,res,db));
+app.post('/eliminarProducto', (req,res) => eliminarElemento(req,res,db));
+app.post('/agregarProducto', (req,res) => agregarElemento(req,res,db));
+app.post('/actualizarProducto', (req,res) => actualizarElemento(req,res,db));
 app.post('/registrar',(req,res) => registrarUsuario(req,res,db,bcrypt,salt));
 app.post('/iniciarSesion',(req,res) => iniciarSesion(req,res,db,bcrypt));
 app.get('/proveedores',(req,res) => pedirProveedores(req,res,db));
