@@ -6,24 +6,24 @@ const pedirInventario = (req,res,db) =>{
 
 const agregarElemento = (req,res,db) => {
     const {product,price,category} = req.body;
-    db('inventory').insert({
+    db('inventory').returning('*').insert({
         product:product,
         price:price,
         category:category
     })
-    .then((data)=>res.json(data))
+    .then((data)=>res.json(data[0]))
     .catch((err)=>res.status(400).json(err))
 }
 
 const actualizarElemento = (req,res,db) =>{
     const {id,product,price,category} = req.body;
-    db('inventory').where('id','=',id)
+    db('inventory').returning('*').where('id','=',id)
     .update({
         product:product,
         price:price,
         category:category
     })
-    .then((data)=>res.json(data))
+    .then((data)=>res.json(data[0]))
     .catch((err)=>res.status(400).json(err))
 }
 
