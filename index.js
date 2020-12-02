@@ -43,7 +43,7 @@ app.post('/registrarFactura', (req,res) => registrarFacturas(req,res,db));
 app.get('/lotes', (req,res) => pedirLotes(req,res,db));
 app.post('/registrarLote', (req,res) => registrarLote(req,res,db));
 app.get('/dolar',(req,res) => lastDolarValue(req,res,db));
-app.post('addDolar', (req,res) => addDolarValue(req,res,db));
+app.post('/addDolar', (req,res) => addDolarValue(req,res,db));
 app.listen(process.env.PORT, ()=>{
 console.log(`app is running on port ${process.env.PORT}` );
 })

@@ -6,12 +6,12 @@ const lastDolarValue = (req,res,db) => {
 
 const addDolarValue = (req,res,db) => {
     const {dolar,date} = req.body;
-     db.select('*').from('dolarHistory')
-        .then((data)=>{
-            console.log(data)
-            console.log(dolar,date)
-        })
-        .catch((err)=>res.status(400).json(err));
+    db('dolarHistory').insert({
+        dolar,
+        date
+    })
+    .then(()=>res.json('Registro exitoso'))
+    .catch((err)=>res.status(400).json('error'));
 }
 
 module.exports= {
