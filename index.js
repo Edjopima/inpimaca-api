@@ -8,7 +8,6 @@ const salt = bcrypt.genSaltSync(saltRounds);
 require('dotenv').config();
 const db =knex({ client: 'pg', connection: process.env.DATABASE_URL});
 
-
 const {pedirInventario, agregarElemento, actualizarElemento, eliminarElemento} = require('./controllers/inventario');
 const {registrarUsuario} = require('./controllers/registrar');
 const {iniciarSesion} = require('./controllers/iniciarSesion');
@@ -16,7 +15,7 @@ const {pedirProveedores, registrarProveedor} = require('./controllers/proveedore
 const {cuentasProveedores, registrarCuenta} = require('./controllers/cuentasProveedores');
 const {pedirFacturas, registrarFacturas} = require('./controllers/facturas');
 const {pedirLotes, registrarLote} = require('./controllers/lotes');
-
+const {lastDolarValue,addDolarValue} = require('./controllers/dolar');
 
 const app = express();
 app.use(bodyParser.json());
@@ -36,6 +35,8 @@ app.get('/facturas' ,(req,res) => pedirFacturas(req,res,db));
 app.post('/registrarFactura', (req,res) => registrarFacturas(req,res,db));
 app.get('/lotes', (req,res) => pedirLotes(req,res,db));
 app.post('/registrarLote', (req,res) => registrarLote(req,res,db));
+app.get('/dolar',(req,res) => lastDolarValue(req,res,db));
+app.post('addDolar', (req,res) => addDolarValue(req,res,db));
 app.listen(process.env.PORT, ()=>{
-    console.log(`app is running on port ${process.env.PORT}` );
+console.log(`app is running on port ${process.env.PORT}` );
 })
