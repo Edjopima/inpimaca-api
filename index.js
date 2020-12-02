@@ -6,7 +6,14 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 require('dotenv').config();
-const db =knex({ client: 'pg', connection: process.env.DATABASE_URL});
+const db =knex({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : process.env.DATABASE_USER,
+    password : process.env.DATABASE_PASSWORD,
+    database : 'inpimaca'
+  }});
 
 const {pedirInventario, agregarElemento, actualizarElemento, eliminarElemento} = require('./controllers/inventario');
 const {registrarUsuario} = require('./controllers/registrar');
