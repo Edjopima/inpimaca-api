@@ -1,14 +1,20 @@
 const lastDolarValue = (req,res,db) => {
     db.select('*').from('dolarHistory')
-        .then((data)=>res.json(data))
+        .then((data)=>{
+            const dolarToday = data[data.length - 1].dolarToday
+            const date = data[data.length - 1].date
+            const dolar = data[data.length - 1].dolar
+            res.json({date, dolarToday,dolar})
+        })
         .catch((err)=>res.status(400).json(err));
 }
 
 const addDolarValue = (req,res,db) => {
-    const {dolar,date} = req.body;
+    const {dolarToday,date,dolar} = req.body;
     db('dolarHistory').insert({
         dolar,
-        date
+        date,
+        dolarToday
     })
     .then(()=>res.json('Registro exitoso'))
     .catch((err)=>res.status(400).json('error'));
