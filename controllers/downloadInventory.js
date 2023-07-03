@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const XLSX = require("xlsx");
 
 const downloadInventory = async (req, res, db) => {
@@ -9,7 +11,14 @@ const downloadInventory = async (req, res, db) => {
   XLSX.utils.book_append_sheet(workbook, worksheet, "Inventory");
 
   // Guardar el archivo temporalmente en el servidor
-  const filePath = "temp/data.xlsx";
+  const directoryPath = path.join(__dirname, "temp");
+  const filePath = path.join(directoryPath, "data.xlsx");
+
+  // Crear el directorio "temp" si no existe
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath);
+  }
+
   XLSX.writeFile(workbook, filePath, { bookType: "xlsx", type: "file" });
 
   // Descargar el archivo
