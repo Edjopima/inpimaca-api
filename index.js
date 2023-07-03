@@ -27,6 +27,7 @@ const {
 const { pedirFacturas, registrarFacturas } = require("./controllers/facturas");
 const { pedirLotes, registrarLote } = require("./controllers/lotes");
 const { lastDolarValue, addDolarValue } = require("./controllers/dolar");
+const { downloadInventory } = require("./controllers/downloadInventory");
 
 const app = express();
 app.use(bodyParser.json());
